@@ -1,0 +1,70 @@
+<ui:composition template="layoutPadrao.xhtml" 
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:define name="titulo">Cadastro de Series</ui:define>
+
+<ui:define name="corpo">
+	<h:form>
+		<p:growl />
+		<p:panel header="Cadastro de Series">
+			<p:panelGrid columns="2">
+				<h:outputText value="Gênero: *" />
+				<p:selectOneMenu value="#{seriadoController.generoSelecionado}"
+					converter="generoConverter" required="true"
+					requiredMessage="O campo Gênero é obrigatório!"
+					filter="true">
+					<f:selectItem itemLabel="SELECIONE" />
+					<f:selectItems 
+						value="#{generoController.lista}" 
+						var="genero"
+						itemLabel="#{genero.descGenero}"
+						itemValue="#{genero}" />
+				</p:selectOneMenu>
+				<h:outputText value="Status: *" />
+				<p:selectOneMenu value="#{seriadoController.statusSelecionado}"
+					converter="statusConverter" required="true"
+					requiredMessage="O campo Status é obrigatório!"
+					filter="true">
+					<f:selectItem itemLabel="SELECIONE" />
+					<f:selectItems 
+						value="#{statusController.lista}" 
+						var="status"
+						itemLabel="#{status.descStatus}"
+						itemValue="#{status}" />
+				</p:selectOneMenu>
+				<h:outputText value="Nome da Serie: *" />
+				<p:inputText value="#{seriadoController.seriado.nome}"
+				 required="true"
+				 requiredMessage="O campo Nome é obrigatório!">
+				<f:validateLength minimum="1" maximum="50" />
+				</p:inputText>
+				<h:outputText value="Comentário: *" />
+				<p:inputText value="#{seriadoController.seriado.comentario}"
+				 required="true"
+				 requiredMessage="O campo Comentário é obrigatório!">
+				<f:validateLength minimum="1" maximum="200" />
+				</p:inputText>
+				<h:outputText value="Nota de Avaliação: *" />
+				<p:inputText value="#{seriadoController.seriado.notaAvaliacao}"
+				 required="true"
+				 requiredMessage="O campo Nota é obrigatório!">
+				<f:validateDoubleRange minimum="1" />
+				</p:inputText>
+				<f:facet name="footer">
+				    <p:commandButton value="Salvar" action="#{seriadoController.salvar}"
+				    	ajax="false" />
+				    <p:commandButton value="Limpar" action="cadastroSeriado.xhtml"
+				    	actionListener="#{seriadoController.limparCampos}"
+				    	immediate="true"
+				    	ajax="false" />
+			    </f:facet>
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
+</ui:define>
+
+</ui:composition>

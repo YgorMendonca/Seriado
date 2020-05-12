@@ -1,0 +1,43 @@
+<ui:composition template="layoutPadrao.xhtml" 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:define name="titulo">Lista de Gêneros</ui:define>
+<ui:define name="corpo">
+	<h:form>
+		<p:growl />
+		
+		<p:panel header="Lista de Gêneros">
+			<p:dataTable border="1" 
+				value="#{generoController.lista}" var="genero"
+				emptyMessage="Nenhum gênero cadastrado!">
+				<p:column headerText="Id">
+					<h:outputText value="#{genero.id}" />
+				</p:column>
+				<p:column headerText="Gênero">
+					<h:outputText value="#{genero.descGenero}" />
+				</p:column>
+				<p:column headerText="Ação">
+					<p:commandButton value="Excluir" 
+						action="#{generoController.excluir}"
+						ajax="false">
+						<f:setPropertyActionListener 
+							value="#{genero}" 
+							target="#{generoController.genero}"/>
+					</p:commandButton>
+					<p:commandButton value="Editar" 
+						action="#{generoController.editar}"
+						ajax="false">
+						<f:setPropertyActionListener 
+							value="#{genero}" 
+							target="#{generoController.genero}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</ui:define>
+</ui:composition>

@@ -1,0 +1,43 @@
+<ui:composition template="layoutPadrao.xhtml" 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:define name="titulo">Lista de Status</ui:define>
+<ui:define name="corpo">
+	<h:form>
+		<p:growl />
+		
+		<p:panel header="Lista de Status">
+			<p:dataTable border="1"
+				value="#{statusController.lista}" var="status"
+				emptyMessage="Nenhum Status cadastrado!">
+				<p:column headerText="Id">
+					<h:outputText value="#{status.id}" />
+				</p:column>
+				<p:column headerText="Statsus">
+					<h:outputText value="#{status.descStatus}" />
+				</p:column>
+				<p:column headerText="Ação">
+					<p:commandButton value="Excluir" 
+						action="#{statusController.excluir}"
+						ajax="false">
+						<f:setPropertyActionListener 
+							value="#{status}" 
+							target="#{statusController.status}"/>
+					</p:commandButton>
+					<p:commandButton value="Editar" 
+						action="#{statusController.editar}"
+						ajax="false">
+						<f:setPropertyActionListener 
+							value="#{status}" 
+							target="#{statusController.status}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</ui:define>
+</ui:composition>

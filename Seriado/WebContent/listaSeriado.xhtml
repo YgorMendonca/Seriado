@@ -1,0 +1,55 @@
+<ui:composition template="layoutPadrao.xhtml" 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:define name="titulo">Lista de Series</ui:define>
+<ui:define name="corpo">
+	<h:form>
+		<p:growl />
+
+		<p:panel header="Lista de Series" toggleable="true">	
+			<p:dataTable border="1" 
+				value="#{seriadoController.lista}" var="seriado" 
+				emptyMessage="Nenhum Seriado cadastrado!">
+				<p:column headerText="Id">
+					<h:outputText value="#{seriado.id}" />
+				</p:column>
+				<p:column headerText="Gênero">
+					<h:outputText value="#{seriado.genero.descGenero}" />
+				</p:column>
+				<p:column headerText="Status">
+					<h:outputText value="#{seriado.status.descStatus}" />
+				</p:column>
+				<p:column headerText="Nome da Serie">
+					<h:outputText value="#{seriado.nome}" />
+				</p:column>
+				<p:column headerText="Comentário">
+					<h:outputText value="#{seriado.comentario}" />
+				</p:column>
+				<p:column headerText="Nota de Avaliação">
+					<h:outputText value="#{seriado.notaAvaliacao}" />
+				</p:column>
+				<p:column headerText="Ação">
+					<p:commandButton style="text-align: center;" value="Excluir"
+						action="#{seriadoController.excluir}"
+						ajax="false">
+						<f:setPropertyActionListener 
+							value="#{seriado}" 
+							target="#{seriadoController.seriado}" />	
+					</p:commandButton>
+					<p:commandButton value="Editar"
+						action="#{seriadoController.editar}"
+						ajax="false">
+						<f:setPropertyActionListener 
+							value="#{seriado}" 
+							target="#{seriadoController.seriado}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</ui:define>
+</ui:composition>
